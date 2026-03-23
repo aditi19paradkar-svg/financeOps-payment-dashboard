@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WS Test</title>
+  </head>
+  <body>
+    <h2>WebSocket Test</h2>
+    <ul id="events"></ul>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+      const socket = io("http://localhost:3000/ws/payments");
+
+      socket.on("connect", () => {
+        console.log("Connected to WS");
+      });
+
+      socket.on("payment_event", (data) => {
+        console.log("Payment event received:", data);
+
+        const li = document.createElement("li");
+        li.innerText = JSON.stringify(data);
+        document.getElementById("events").appendChild(li);
+      });
+    </script>
+  </body>
+</html>

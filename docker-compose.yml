@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+
+  mongodb:
+    image: mongo:6
+    container_name: financeops-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  redis:
+    image: redis:7
+    container_name: financeops-redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  api:
+    image: node:18
+    container_name: financeops-api
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "npm install && npx nx serve api"
+    depends_on:
+      - mongodb
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/financeops
+
+  web:
+    image: node:18
+    container_name: financeops-web
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "npm install && npx nx dev web --port=3001"
+    depends_on:
+      - api
+    ports:
+      - "3001:3001"
+
+volumes:
+  mongodb_data:
