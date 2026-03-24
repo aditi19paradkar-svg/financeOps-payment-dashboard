@@ -4,7 +4,7 @@ A full-stack real-time analytics dashboard for monitoring payment activity. The 
 
 Built using Next.js, NestJS, MongoDB, WebSockets, and Redux Toolkit in an Nx monorepo architecture.
 
-Features
+## Features
 Real-Time Payment Monitoring
 
 WebSocket-based payment event streaming
@@ -43,7 +43,7 @@ Memoized chart rendering
 
 Efficient MongoDB aggregation queries
 
-Tech Stack
+## Tech Stack
 Frontend
 
 Next.js (App Router)
@@ -68,11 +68,11 @@ WebSocket Gateway
 
 Socket.io
 
-Dev Architecture
+## Dev Architecture
 
 Nx Monorepo
 
-Project Structure
+## Project Structure
 financeops/
 │
 ├── api/                 # NestJS backend
@@ -92,7 +92,8 @@ financeops/
 ├── ARCHITECTURE.md
 ├── .env.example
 └── README.md
-System Architecture
+
+## System Architecture
 
 The system follows a real-time event-driven architecture.
 
@@ -113,7 +114,7 @@ Payments Module
 
 Handles payment creation and event broadcasting.
 
-Endpoint:
+## Endpoint:
 
 POST /api/payments/seed
 
@@ -128,7 +129,7 @@ Endpoints:
 GET /api/analytics/metrics
 GET /api/analytics/trends?period=day|week|month
 
-Metrics include:
+## Metrics include:
 
 totalVolume
 
@@ -140,7 +141,7 @@ peakHour
 
 topPaymentMethod
 
-WebSocket Gateway
+## WebSocket Gateway
 
 Namespace:
 
@@ -148,7 +149,7 @@ Namespace:
 
 Broadcasts payment events in real time.
 
-Event format:
+## Event format:
 
 PaymentEvent {
   type: 'payment_received' | 'payment_failed' | 'payment_refunded'
@@ -168,7 +169,7 @@ Primary collection: payments
   updatedAt: Date
 }
 
-Indexes are created on:
+## Indexes are created on:
 
 tenantId
 createdAt
@@ -181,7 +182,7 @@ Frontend State Management
 
 Redux Toolkit manages application state.
 
-Global state structure:
+## Global state structure:
 
 {
   analyticsApi: RTK Query state
@@ -194,7 +195,7 @@ Global state structure:
   }
 }
 
-Responsibilities:
+## Responsibilities:
 
 Layer	Purpose
 RTK Query	API data fetching and caching
@@ -223,13 +224,13 @@ npm install
 Start Backend
 npx nx serve api
 
-Backend runs at:
+## Backend runs at:
 
 http://localhost:3000
 Start Frontend
 npx nx dev web --port=3001
 
-Frontend runs at:
+# Frontend runs at:
 
 http://localhost:3001
 Testing Real-Time Events
@@ -252,14 +253,15 @@ Start all services with:
 
 docker-compose up
 
-Services:
+## Services:
 
 Service	Port
 MongoDB	27017
 Redis	6379
 API	3000
 Web	3001
-Scalability Considerations
+
+## Scalability Considerations
 
 The system can be extended with:
 
@@ -281,11 +283,16 @@ Advanced anomaly detection
 
 Kubernetes deployment
 
-Conclusion
+## Dashboard Preview
+
+![Dashboard](docs/payment-dashboard.png)
+![Events](docs/payment-events.png)
+
+## Conclusion
 
 This project demonstrates a real-time full-stack analytics system capable of processing live payment data and visualizing operational metrics.
 
-Key engineering concepts showcased:
+## Key engineering concepts showcased:
 
 real-time WebSocket event streaming
 
@@ -297,7 +304,7 @@ modular backend architecture
 
 The system is suitable for fintech monitoring dashboards and payment observability platforms.
 
-Author
+## Author
 
 Built as part of the FinanceOps Software Engineer Technical Assignment.
 
